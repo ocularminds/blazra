@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-FROM eclipse-temurin:17-jdk-jammy@sha256:29467857e8bde40ab1f7befecbda0ea764b95afec1cc7f89aa90f7a766577e19 AS build
+FROM eclipse-temurin:25-jdk-jammy@sha256:89565961a318534f01c971c7b1d030e60713c66995b887c94010cef938dbc53e AS build
 
 WORKDIR /workspace
 COPY --chmod=0755 gradlew ./gradlew
@@ -13,7 +13,7 @@ COPY src ./src
 RUN --mount=type=cache,target=/root/.gradle \
     ./gradlew clean installDist --offline --no-daemon
 
-FROM gcr.io/distroless/java17-debian13:nonroot@sha256:1c6329f129ec1680322029528b12b5798e770658bee24d3a4854157992157255
+FROM gcr.io/distroless/java17-debian13:nonroot@sha256:2dcb2b21efab7e9250945985e0b0aab99ec7835db96a7bbc68edd1a0ad2e51ff
 
 ARG VERSION=dev
 ARG REVISION=unknown
